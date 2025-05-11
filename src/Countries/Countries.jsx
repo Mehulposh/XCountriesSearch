@@ -1,19 +1,10 @@
 import React from 'react';
 import Card from '../components/Card/card';
-import { useState, useEffect } from 'react';
-import getAllCountries from '../api/api';
+
 import styles from './Countries.module.css';
 
-function Countries() {
-    const [countries, setCountries] = useState([]);
-
-    useEffect(() => {
-        async function fetchCountries() {
-            const data = await getAllCountries();
-            setCountries(data);
-        }
-        fetchCountries();
-    }, []);
+function Countries({countries}) {
+    
 
     return (
         <div className={styles.countries_container}>

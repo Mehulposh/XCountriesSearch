@@ -1,9 +1,44 @@
-import Countries from "./Countries/Countries"
+import React,{useState,useEffect} from 'react';
+import getAllCountries from './api/api';
+import Countries from "./Countries/Countries"; 
+import './App.css';
 
 function App() {
+  const [countries, setCountries] = useState([]);
+  const [searchedCountries, setSearcedCountries] = useState([]);
+  const [searchText , setSearchText] = useState('');
+
+    useEffect(() => {
+        async function fetchCountries() {
+            const data = await getAllCountries();
+            setCountries(data);
+            setSearcedCountries(data);
+        }
+        fetchCountries();
+    }, []);
+
+    
+
+    const handleSearch = (value) => {
+      setSearchText(value);
+      if(searchText.trim() === ''){
+        setSearcedCountries(countries);
+      }
+      else{
+        setSearcedCountries(
+          (countries) => countries.filter((country) => 
+            country.common.toLowerCase().includes(searchText.toLowerCase())
+          )
+        );
+      }
+    };
+
   return (
     <div className="App">
-      <Countries />
+      <div className='searchBar'>
+        <input type='text' placeholder='Search Countries' value={searchText} onChange={(e) => handleSearch(e.target.value)}/>
+      </div>
+      <Countries countries={searchedCountries} />
     </div>
   )
 
