@@ -9,7 +9,7 @@ function Countries({countries}) {
     return (
         <div className={styles.countries_container}>
             {countries.map((country) => (
-                <Card key={country.name} name={country.common} png={country.png} />
+                <Card key={country.common} name={country.common} png={country.png} />
             ))}
         </div>
     );
