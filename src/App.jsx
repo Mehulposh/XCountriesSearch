@@ -21,13 +21,13 @@ function App() {
 
     const handleSearch = (value) => {
       setSearchText(value);
-      if(searchText.trim() === ''){
+      if(value.trim() === ''){
         setSearcedCountries(countries);
       }
       else{
         setSearcedCountries(
-          (countries) => countries.filter((country) => 
-            country.common.toLowerCase().includes(searchText.toLowerCase())
+          countries.filter((country) => 
+            country.common.toLowerCase().includes(value.toLowerCase())
           )
         );
       }
@@ -45,4 +45,4 @@ function App() {
   // This is a functional component that serves as the main entry point for the application. It returns a div with the class "App" that contains the Countries component. The Countries component is responsible for fetching and displaying a list of countries.
 }
 
-export default App
+export default App;
